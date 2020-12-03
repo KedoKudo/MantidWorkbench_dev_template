@@ -2,6 +2,9 @@
 # Created by https://www.toptal.com/developers/gitignore/api/linux,macos,windows,vscode,pycharm,c++,cmake,python,jetbrains
 # Edit at https://www.toptal.com/developers/gitignore?templates=linux,macos,windows,vscode,pycharm,c++,cmake,python,jetbrains
 
+### Mantid ###
+mantid/*
+
 ### C++ ###
 # Prerequisites
 *.d
@@ -35,19 +38,6 @@
 *.exe
 *.out
 *.app
-
-### CMake ###
-CMakeLists.txt.user
-CMakeCache.txt
-CMakeFiles
-CMakeScripts
-Testing
-Makefile
-cmake_install.cmake
-install_manifest.txt
-compile_commands.json
-CTestTestfile.cmake
-_deps
 
 ### CMake Patch ###
 # External projects
