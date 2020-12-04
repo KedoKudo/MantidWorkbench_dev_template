@@ -67,6 +67,8 @@ init:
 	@cd $(MANTIDDIR); git checkout ornl-next
 	@echo "make data directory, put testing data here"
 	mkdir -p data
+	@echo "make figure directory, save all figures here"
+	mkdir -p figures
 	@echo "config Mantid from scratch"
 	mkdir -p ${BUILDDIR}
 	mkdir -p ${INTALLDIR}
