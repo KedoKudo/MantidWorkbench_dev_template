@@ -1,5 +1,12 @@
 # Top level control for managing the dev work
 
+# ----- Project Macro ----- #
+UnitTestName := MyAlgorithmTest
+TestScript := test.py
+
+# ------------------------------------------------------ #
+# ------------- DO NOT MODIFY FROM BELOW ----------------#
+# ------------------------------------------------------ #
 mkfile_path := $(abspath $(lastword $(MAKEFILE_LIST)))
 mkfile_top  := $(dir $(mkfile_path))
 current_dir := $(notdir $(patsubst %/,%,$(dir $(mkfile_path))))
@@ -16,18 +23,40 @@ ifneq (,$(findstring analysis,$(HOSTNAME)))
 	# on analysis cluster, need to turn off jemalloc for RHEL_7
 	CMKOPTS := $(BASEOPTS) -DUSE_JEMALLOC=OFF
 	CMKCMDS := cmake3 $(MANTIDDIR) $(CMKOPTS)
+	BLDCMDS := ninja all AlgorithmsTest && ninja install
 else
 	CMKOPTS := $(BASEOPTS)
 	CMKCMDS := cmake $(MANTIDDIR) $(CMKOPTS)
+	BLDCMDS := ninja -j4 all AlgorithmsTest && ninja install
 endif
 
+# ----- UNIT TEST -----
+UNTCMDS := ctest --output-on-failure -R $(UnitTestName)
+
 # ----- Targets -----
-.PHONY: all list clean
+.PHONY: test qtest build unittest docs init list clean archive
 
-all:
-	@echo Run everything
+test: build docs unittest
+	@echo "build everything, run unittest and customized testing script"
+	$(INTALLDIR)/bin/mantidworkbench -x $(TestScript)
 
-# initialize the workproject
+qtest: build
+	@echo "quick test, no doc and unittest"
+	$(INTALLDIR)/bin/mantidworkbench -x $(TestScript)
+
+build:
+	@echo "build mantid"
+	@cd $(BUILDDIR); $(BLDCMDS)
+
+unittest:
+	@echo "run unittest"
+	@cd $(BUILDDIR); $(UNTCMDS)
+
+docs:
+	@echo "build html docs"
+	@cd $(BUILDDIR); ninja docs-html
+
+# initialize the workproject, only need to be done once
 init:
 	@echo "deploying on host: ${HOSTNAME}"
 	@echo "clone Mantid if not done already"
