@@ -61,7 +61,7 @@ init:
 	@echo "deploying on host: ${HOSTNAME}"
 	@echo "clone Mantid if not done already"
 	@if [ ! -d "$(MANTIDDIR)" ]; then \
-		git clone https://github.com/mantidproject/mantid.git; \
+		git clone git@github.com:mantidproject/mantid.git; \
 	fi
 	@echo "switch to ornl-next branch"
 	@cd $(MANTIDDIR); git checkout ornl-next
