@@ -74,6 +74,8 @@ init:
 	mkdir -p ${INTALLDIR}
 	@echo "running cmake"
 	@cd ${BUILDDIR}; ${CMKCMDS}
+	@echo "symbolic the build folder for vscode"
+	@cd $(MANTIDDIR); ln -s ${BUILDDIR} .
 
 
 # list all possible target in this makefile
