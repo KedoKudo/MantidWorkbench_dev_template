@@ -77,6 +77,10 @@ init:
 	@echo "symbolic the build folder for vscode"
 	@cd $(MANTIDDIR); ln -s ${BUILDDIR} .
 
+reconfig:
+	@echo "reconfig cmake"
+	@cd ${BUILDDIR}; ${CMKCMDS}
+
 
 # list all possible target in this makefile
 list:
