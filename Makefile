@@ -1,6 +1,7 @@
 # Top level control for managing the dev work
 
 # ----- Project Macro ----- #
+UnitTestCategory := AlgorithmsTest
 UnitTestName := MyAlgorithmTest
 TestScript := test.py
 
@@ -23,11 +24,11 @@ ifneq (,$(findstring analysis,$(HOSTNAME)))
 	# on analysis cluster, need to turn off jemalloc for RHEL_7
 	CMKOPTS := $(BASEOPTS) -DUSE_JEMALLOC=OFF
 	CMKCMDS := cmake3 $(MANTIDDIR) $(CMKOPTS)
-	BLDCMDS := ninja all AlgorithmsTest && ninja install ; true
+	BLDCMDS := ninja all $(UnitTestCategory) && ninja install ; true
 else
 	CMKOPTS := $(BASEOPTS)
 	CMKCMDS := cmake $(MANTIDDIR) $(CMKOPTS)
-	BLDCMDS := ninja -j4 all AlgorithmsTest && ninja install ; true
+	BLDCMDS := ninja -j4 all $(UnitTestCategory) && ninja install ; true
 endif
 
 # ----- UNIT TEST -----
