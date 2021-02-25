@@ -19,6 +19,9 @@ INTALLDIR := $(mkfile_top)/opt/mantid
 HOSTNAME  := $(shell hostname)
 BASEOPTS  := -GNinja -DENABLE_MANTIDPLOT=OFF -DCMAKE_INSTALL_PREFIX=$(INTALLDIR)
 
+# ----- GDB -----
+TestExecutable := $(BUILDDIR)/bin/AlgorithmsTest
+
 # ----- BUILD OPTIONS -----
 ifneq (,$(findstring analysis,$(HOSTNAME)))
 	# on analysis cluster, need to turn off jemalloc for RHEL_7
@@ -52,6 +55,10 @@ build:
 unittest:
 	@echo "run unittest"
 	@cd $(BUILDDIR); $(UNTCMDS)
+
+debugUnittest:
+	@echo "run unittest with gdb"
+	dgb --args $(TestExecutable) $(UnitTestName)
 
 docs:
 	@echo "build html docs"
