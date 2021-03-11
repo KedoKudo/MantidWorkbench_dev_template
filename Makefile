@@ -1,7 +1,7 @@
 # Top level control for managing the dev work
 
 # ----- Project Macro ----- #
-UnitTestCategory := AlgorithmsTest
+UnitTestCategory := AllTests
 UnitTestName := MyAlgorithmTest
 TestScript := test.py
 
@@ -31,11 +31,11 @@ ifneq (,$(findstring analysis,$(HOSTNAME)))
 else
 	CMKOPTS := $(BASEOPTS)
 	CMKCMDS := cmake $(MANTIDDIR) $(CMKOPTS)
-	BLDCMDS := ninja -j4 all $(UnitTestCategory) && ninja install ; true
+	BLDCMDS := ninja -j3 all $(UnitTestCategory) && ninja install ; true
 endif
 
 # ----- UNIT TEST -----
-UNTCMDS := ctest --output-on-failure -R $(UnitTestName)
+UNTCMDS := ctest --output-on-failure -V -R $(UnitTestName)
 
 # ----- Targets -----
 .PHONY: test qtest build unittest docs init list clean archive
