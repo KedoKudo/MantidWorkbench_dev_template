@@ -58,7 +58,7 @@ unittest:
 
 debugUnittest:
 	@echo "run unittest with gdb"
-	dgb --args $(TestExecutable) $(UnitTestName)
+	gdb --args $(TestExecutable) $(UnitTestName)
 
 docs:
 	@echo "build html docs"
