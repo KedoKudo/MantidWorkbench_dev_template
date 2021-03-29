@@ -24,8 +24,9 @@ TestExecutable := $(BUILDDIR)/bin/AlgorithmsTest
 
 # ----- BUILD OPTIONS -----
 ifneq (,$(findstring analysis,$(HOSTNAME)))
-	# on analysis cluster, need to turn off jemalloc for RHEL_7
-	CMKOPTS := $(BASEOPTS) -DUSE_JEMALLOC=OFF
+	# on analysis cluster, need to turn off jemalloc and pre-commit for
+	# analysis.sns.gov
+	CMKOPTS := $(BASEOPTS) -DUSE_JEMALLOC=OFF -DENABLE_PRECOMMIT=off
 	CMKCMDS := cmake3 $(MANTIDDIR) $(CMKOPTS)
 	BLDCMDS := ninja all $(UnitTestCategory) && ninja install ; true
 else
