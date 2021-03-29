@@ -12,3 +12,13 @@ $Type$IssueNumGithub_$Abbre
   - O: others
 - Issue number
 - Abbre
+
+# Steps
+
+- use `make init` to clone mantid and setup cmake
+- go into folder `mantid` to setup you branch
+- go back to proj folder, use `make build` to kick off building
+- edit relevant targets in Makefile
+- developing
+  - use `make qtest` if a testing script `test.py` is used
+  - use `make unittest` if a unit test is used
