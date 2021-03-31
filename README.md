@@ -3,15 +3,7 @@ This is a template for setting up a development repo for MantidWorkbench related
 
 # Folder renaming convention
 
-$Type$IssueNumGithub_$Abbre
-
-- Type: 
-  - D: defects
-  - T: tasks
-  - G: gui
-  - O: others
-- Issue number
-- Abbre
+$Type$TaskNumber_$Abbre
 
 # Steps
 
