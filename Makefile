@@ -25,16 +25,16 @@ TestExecutable := $(BUILDDIR)/bin/AlgorithmsTest
 # ----- BUILD OPTIONS -----
 # ----- BUILD OPTIONS -----
 ifneq (,$(findstring analysis,$(HOSTNAME)))
-	# on analysis cluster, need to turn off jemalloc and pre-commit for
+	# on analysis cluster, need to turn off jemalloc for
 	# analysis.sns.gov
-	CMKOPTS := $(BASEOPTS) -DUSE_JEMALLOC=OFF -DENABLE_PRECOMMIT=off
+	CMKOPTS := $(BASEOPTS) -DUSE_JEMALLOC=OFF
 	CMKCMDS := cmake3 $(MANTIDDIR) $(CMKOPTS)
 	BLDCMDS := ninja all $(UnitTestCategory) && ninja install ; true
 else
 	ifneq (,$(findstring ndav,$(HOSTNAME)))
-		# on analysis cluster, need to turn off jemalloc and pre-commit for
+		# on analysis cluster, need to turn off jemalloc for
 		# ndav?.sns.gov
-		CMKOPTS := $(BASEOPTS) -DUSE_JEMALLOC=OFF -DENABLE_PRECOMMIT=off
+		CMKOPTS := $(BASEOPTS) -DUSE_JEMALLOC=OFF
 		CMKCMDS := cmake3 $(MANTIDDIR) $(CMKOPTS)
 		BLDCMDS := ninja all $(UnitTestCategory) && ninja install ; true
 	else
