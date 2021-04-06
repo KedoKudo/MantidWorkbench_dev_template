@@ -29,7 +29,7 @@ ifneq (,$(findstring analysis,$(HOSTNAME)))
 	# analysis.sns.gov
 	CMKOPTS := $(BASEOPTS) -DUSE_JEMALLOC=OFF
 	CMKCMDS := cmake3 $(MANTIDDIR) $(CMKOPTS)
-	BLDCMDS := ninja all $(UnitTestCategory) && ninja install ; true
+	BLDCMDS := NINJA_STATUS="[%f+%r+%u=%t] ";ninja all $(UnitTestCategory) && ninja install ; true
 else
 	ifneq (,$(findstring ndav,$(HOSTNAME)))
 		# on analysis cluster, need to turn off jemalloc for
