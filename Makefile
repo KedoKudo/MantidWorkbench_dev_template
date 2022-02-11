@@ -76,6 +76,7 @@ docs:
 
 # initialize the workproject, only need to be done once
 init:
+	@echo "Must be in the mantid-develop conda env"
 	@echo "deploying on host: ${HOSTNAME}"
 	@echo "clone Mantid if not done already"
 	@if [ ! -d "$(MANTIDDIR)" ]; then \
@@ -83,17 +84,14 @@ init:
 	fi
 	@echo "switch to ornl-next branch"
 	@cd $(MANTIDDIR); git checkout ornl-next
+	@echo "use mantid-develop env to config"
+	@cd $(MANTIDDIR); cmake --preset=linux ${CMKOPTS}
 	@echo "make data directory, put testing data here"
 	mkdir -p data
 	@echo "make figure directory, save all figures here"
 	mkdir -p figures
-	@echo "config Mantid from scratch"
-	mkdir -p ${BUILDDIR}
-	mkdir -p ${INTALLDIR}
-	@echo "running cmake"
-	@cd ${BUILDDIR}; ${CMKCMDS}
-	@echo "symbolic the build folder for vscode"
-	@cd $(MANTIDDIR); ln -s ${BUILDDIR} .
+	@echo "link build folder to top"
+	ln -s $(MANTIDDIR)/build .
 
 reconfig:
 	@echo "reconfig cmake"
