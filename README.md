@@ -14,3 +14,13 @@ $Type$TaskNumber_$Abbre
 - developing
   - use `make qtest` if a testing script `test.py` is used
   - use `make unittest` if a unit test is used
+
+
+```mermaid
+graph TD;
+  make new repo --> git clone to local;
+  git clone to local --> make init;
+  make init --> check local conda;
+  check local conda --> build;
+  build --> dev;
+```
