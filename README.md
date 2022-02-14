@@ -18,9 +18,8 @@ $Type$TaskNumber_$Abbre
 
 ```mermaid
 graph TD;
-  make new repo --> git clone to local;
-  git clone to local --> make init;
-  make init --> check local conda;
-  check local conda --> build;
-  build --> dev;
+    newRepo-->gitClone;
+    gitClone-->makeInit;
+    gitClone-->condaCheck;
+    condaCheck-->makeInit;
 ```
